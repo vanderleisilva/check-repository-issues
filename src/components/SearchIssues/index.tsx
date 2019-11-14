@@ -1,8 +1,4 @@
 import React from 'react';
-import { AppState } from '../../store';
-import { filterIssue } from '../../store/issues/actions';
-import { IssueFilter } from '../../store/issues/types';
-import { connect } from 'react-redux';
 import {
   TextField,
   InputAdornment,
@@ -11,63 +7,46 @@ import {
   Select,
   MenuItem,
   Button,
+  makeStyles,
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store';
 import SearchIcon from '@material-ui/icons/Search';
 
-const mapStateToProps = ({ issues: { filter } }: AppState) => ({
-  filter,
-});
+import styles from './styles';
+const useStyles = makeStyles(styles);
 
-interface Props {
-  filter: IssueFilter;
-  filterIssue: typeof filterIssue;
-}
-
-const SearchIssues: React.FC<Props> = ({ filter, filterIssue }) => {
-  const handleKey = (e: React.ChangeEvent<{ value: unknown }>) => {
-    filterIssue({
-      ...filter,
-      key: e.target.value as string,
-    });
-  };
-
-  const handleStatus = (e: React.ChangeEvent<{ value: unknown }>) => {
-    let value: unknown = e.target.value;
-    filterIssue({
-      ...filter,
-      status: value !== undefined ? value === '1' : undefined,
-    });
-  };
+const SearchIssues: React.FC = () => {
+  const filter = useSelector(({ issues: { filter } }: AppState) => filter);
+  const classes = useStyles();
 
   return (
-    <div>
-      <TextField
-        label='Search for an issue'
-        variant='outlined'
-        onChange={handleKey}
-        value={filter.key}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position='start' children={<SearchIcon />} />
-          ),
-        }}
-      />
+    <div className={classes.container}>
+      <div>
+        <TextField
+          label='Search for an issue'
+          className={classes.textField}
+          value={filter.key}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start' children={<SearchIcon />} />
+            ),
+          }}
+        />
 
-      <FormControl variant='outlined' style={{ minWidth: 120 }}>
-        <InputLabel children='Status' />
-        <Select value={filter.status} onChange={handleStatus}>
-          <MenuItem value={undefined} children='All' />
-          <MenuItem value='1' children='Open' />
-          <MenuItem value='0' children='Close' />
-        </Select>
-      </FormControl>
+        <FormControl style={{ minWidth: 120 }}>
+          <InputLabel children='Status' />
+          <Select value={filter.status}>
+            <MenuItem value={undefined} children='All' />
+            <MenuItem value='1' children='Open' />
+            <MenuItem value='0' children='Close' />
+          </Select>
+        </FormControl>
+      </div>
 
-      <Button variant='contained' children='search' size='large' />
+      <Button variant='contained' children='search' color='primary' />
     </div>
   );
 };
 
-export default connect(
-  mapStateToProps,
-  { filterIssue }
-)(SearchIssues);
+export default SearchIssues;

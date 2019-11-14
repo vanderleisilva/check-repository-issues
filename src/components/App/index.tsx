@@ -5,7 +5,6 @@ import List from '../ListIssues';
 import Show from '../ShowIssue';
 
 import styles from './styles';
-
 const useStyles = makeStyles(styles);
 
 const App: React.FC = () => {
