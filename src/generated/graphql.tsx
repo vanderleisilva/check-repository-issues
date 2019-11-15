@@ -17482,7 +17482,8 @@ export type ViewerHovercardContext = HovercardContext & {
 
 
 export type ShowIssueQueryVariables = {
-  number: Scalars['Int']
+  number: Scalars['Int'],
+  cursor?: Maybe<Scalars['String']>
 };
 
 
@@ -17496,7 +17497,10 @@ export type ShowIssueQuery = (
       & { comments: (
         { __typename?: 'IssueCommentConnection' }
         & Pick<IssueCommentConnection, 'totalCount'>
-        & { edges: Maybe<Array<Maybe<(
+        & { pageInfo: (
+          { __typename?: 'PageInfo' }
+          & Pick<PageInfo, 'endCursor' | 'hasPreviousPage'>
+        ), edges: Maybe<Array<Maybe<(
           { __typename?: 'IssueCommentEdge' }
           & { node: Maybe<(
             { __typename?: 'IssueComment' }
@@ -17552,7 +17556,7 @@ export type ListIssuesQuery = (
 
 
 export const ShowIssueDocument = gql`
-    query ShowIssue($number: Int!) {
+    query ShowIssue($number: Int!, $cursor: String) {
   repository(owner: "facebook", name: "react") {
     issue(number: $number) {
       title
@@ -17561,7 +17565,11 @@ export const ShowIssueDocument = gql`
       publishedAt
       updatedAt
       closed
-      comments(last: 20) {
+      comments(last: 20, before: $cursor) {
+        pageInfo {
+          endCursor
+          hasPreviousPage
+        }
         totalCount
         edges {
           node {
@@ -17609,6 +17617,7 @@ export function withShowIssue<TProps, TChildProps = {}>(operationOptions?: Apoll
  * const { data, loading, error } = useShowIssueQuery({
  *   variables: {
  *      number: // value for 'number'
+ *      cursor: // value for 'cursor'
  *   },
  * });
  */
