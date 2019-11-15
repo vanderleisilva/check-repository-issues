@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { AppState } from '../../store';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import {
   Typography,
   Table,
@@ -15,6 +16,7 @@ import {
 
 import SearchIssues from '../SearchIssues';
 import IssueLoadMore from '../IssueLoadMore';
+import { DATE_FORMAT } from '../../constants';
 
 const ListIssues: React.FC = () => {
   const list = useSelector(({ issues: { list } }: AppState) => list);
@@ -42,7 +44,7 @@ const ListIssues: React.FC = () => {
             l && l.node ? (
               <TableRow key={i}>
                 <TableCell children={l.node.title} />
-                <TableCell children={l.node.updatedAt} />
+                <TableCell children={moment(l.node.updatedAt).format(DATE_FORMAT)} />
                 <TableCell
                   children={
                     <Chip

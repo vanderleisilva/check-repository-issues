@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <div className={classes.container}>
         <Router basename='/'>
           <Switch>
-            <Route exact path='/show/:number/:page?' component={Show} />
+            <Route exact path='/show/:number' component={Show} />
             <Route exact component={List} />
           </Switch>
         </Router>

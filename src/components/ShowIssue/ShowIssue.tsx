@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store';
-import { Typography, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles, Fab, Chip } from '@material-ui/core';
+import { AssignmentReturn } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 import Comments from '../Comments';
 
 import styles from './styles';
+import moment from 'moment';
+import { DATE_FORMAT } from '../../constants';
 const useStyles = makeStyles(styles);
 
 const Index: React.FC = () => {
@@ -18,15 +22,30 @@ const Index: React.FC = () => {
   const Issue = selected.repository.issue;
 
   return (
-    <Fragment>
+    <div className={classes.container}>
+      <Fab
+        color='secondary'
+        size='small'
+        component={Link}
+        to='/'
+        className={classes.return}>
+        <AssignmentReturn />
+      </Fab>
       <Typography children={Issue.title} variant='h6' />
       <Typography className={classes.info} component='p' variant='caption'>
-        Published at: <b>{Issue.publishedAt}</b>;
-        Updated at: <b>{Issue.updatedAt}</b>;
+        Published at: <b>{moment(Issue.publishedAt).format(DATE_FORMAT)}</b>; Updated at:
+        <b>{moment(Issue.updatedAt).format(DATE_FORMAT)}</b>;
       </Typography>
-      <Typography children={Issue.bodyText} />
+      <div className={classes.chip}>
+        <Chip
+          {...(Issue.closed
+            ? { label: 'Closed' }
+            : { label: 'Open', color: 'primary' })}
+        />
+      </div>
+      <Typography children={Issue.bodyText} className={classes.text} />
       <Comments />
-    </Fragment>
+    </div>
   );
 };
 
