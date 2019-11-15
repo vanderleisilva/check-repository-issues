@@ -21,8 +21,8 @@ const initialState: IssueState = {
   },
   error: '',
   loading: false,
-  loadMoreComments: '',
-  loadMoreIssues: '',
+  loadMoreComments: undefined,
+  loadMoreIssues: undefined,
 };
 
 export function issuesReducer(

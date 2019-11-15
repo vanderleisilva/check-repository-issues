@@ -10,8 +10,8 @@ export interface IssueState {
   visible?: ShowIssueQuery;
   filter: IssueFilter;
   loading: boolean;
-  loadMoreIssues: string;
-  loadMoreComments: string;
+  loadMoreIssues?: string;
+  loadMoreComments?: string;
   error: string;
 }
 
