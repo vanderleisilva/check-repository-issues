@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const QUERY_SHOW_ISSUE = gql`
-  query ShowIssue($number: Int!) {
+  query ShowIssue($number: Int!, $cursor: String) {
     repository(owner: "facebook", name: "react") {
       issue(number: $number) {
         title
@@ -10,7 +10,11 @@ export const QUERY_SHOW_ISSUE = gql`
         publishedAt
         updatedAt
         closed
-        comments(last: 20) {
+        comments(last: 20, before: $cursor) {
+          pageInfo {
+            endCursor
+            hasPreviousPage
+          }
           totalCount
           edges {
             node {
@@ -29,9 +33,13 @@ export const QUERY_SHOW_ISSUE = gql`
 `;
 
 export const QUERY_LIST_ISSUES = gql`
-  query ListIssues {
+  query ListIssues($cursor: String) {
     repository(owner: "facebook", name: "react") {
-      issues(last: 20) {
+      issues(last: 20, before: $cursor) {
+        pageInfo {
+          endCursor
+          hasPreviousPage
+        }
         totalCount
         edges {
           node {
