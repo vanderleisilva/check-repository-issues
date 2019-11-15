@@ -12,7 +12,9 @@ import {
   Button,
   Chip,
 } from '@material-ui/core';
+
 import SearchIssues from '../SearchIssues';
+import IssueLoadMore from '../IssueLoadMore';
 
 const ListIssues: React.FC = () => {
   const list = useSelector(({ issues: { list } }: AppState) => list);
@@ -24,7 +26,8 @@ const ListIssues: React.FC = () => {
 
   return (
     <Fragment>
-      <Typography children='List Issues' variant='h5' />
+      <Typography children='Issues' variant='h5' />
+      <Typography children={`${list.repository.issues.totalCount} issues found`} variant='caption' />
       <SearchIssues />
       <Table>
         <TableHead>
@@ -67,6 +70,7 @@ const ListIssues: React.FC = () => {
           )}
         </TableBody>
       </Table>
+      <IssueLoadMore />
     </Fragment>
   );
 };
