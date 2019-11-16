@@ -9,7 +9,7 @@ import {
   LOAD_MORE_ISSUES
 } from './types';
 
-import { ListIssuesQuery, ShowIssueQuery } from '../../generated/graphql';
+import { ListIssuesQuery, ShowIssueQuery } from 'generated/graphql';
 import { ApolloError } from 'apollo-boost';
 
 export const addIssues = (payload: ListIssuesQuery) => ({

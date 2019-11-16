@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../store';
+import { AppState } from 'store';
 import moment from 'moment';
-import { DATE_FORMAT } from '../../constants';
+import { DATE_FORMAT } from 'const';
 import {
   Typography,
   Table,

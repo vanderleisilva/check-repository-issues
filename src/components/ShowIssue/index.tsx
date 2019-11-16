@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useShowIssueQuery } from '../../generated/graphql';
-import { setError, setLoading, showIssue } from '../../store/issues/actions';
+import { useShowIssueQuery } from 'generated/graphql';
+import { setError, setLoading, showIssue } from 'store/issues/actions';
 import ShowIssue from './ShowIssue';
 import { useParams } from 'react-router-dom';
-import { AppState } from '../../store';
+import { AppState } from 'store';
 
 const Index: React.FC = () => {
   const { number } = useParams();

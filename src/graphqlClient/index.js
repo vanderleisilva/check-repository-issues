@@ -1,5 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
-import { GRAPHQL_URL, GITHUB_TOKEN } from '../constants';
+import { GRAPHQL_URL, GITHUB_TOKEN } from 'const';
 
 export default new ApolloClient({
   link: new HttpLink({

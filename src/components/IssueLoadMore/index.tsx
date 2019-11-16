@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from '../../store';
+import { AppState } from 'store';
 import { Button, makeStyles } from '@material-ui/core';
 
 import styles from './styles';
-import { loadMoreIssues } from '../../store/issues/actions';
+import { loadMoreIssues } from 'store/issues/actions';
 const useStyles = makeStyles(styles);
 
 const IssueLoadMore: React.FC = () => {

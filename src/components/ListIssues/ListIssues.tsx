@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { AppState } from '../../store';
+import { AppState } from 'store';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -14,9 +14,9 @@ import {
   Chip,
 } from '@material-ui/core';
 
-import SearchIssues from '../SearchIssues';
-import IssueLoadMore from '../IssueLoadMore';
-import { DATE_FORMAT } from '../../constants';
+import SearchIssues from 'components/SearchIssues';
+import IssueLoadMore from 'components/IssueLoadMore';
+import { DATE_FORMAT } from 'const';
 
 const ListIssues: React.FC = () => {
   const list = useSelector(({ issues: { list } }: AppState) => list);

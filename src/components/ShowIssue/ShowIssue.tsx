@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../store';
+import { AppState } from 'store';
 import { Typography, makeStyles, Fab, Chip } from '@material-ui/core';
 import { AssignmentReturn } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import Comments from '../Comments';
+import Comments from 'components/Comments';
 
 import styles from './styles';
 import moment from 'moment';
-import { DATE_FORMAT } from '../../constants';
+import { DATE_FORMAT } from 'const';
 const useStyles = makeStyles(styles);
 
 const Index: React.FC = () => {

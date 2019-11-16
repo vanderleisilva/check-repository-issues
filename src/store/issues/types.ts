@@ -1,4 +1,4 @@
-import { ListIssuesQuery, ShowIssueQuery } from '../../generated/graphql';
+import { ListIssuesQuery, ShowIssueQuery } from 'generated/graphql';
 
 export interface IssueFilter {
   key: string;

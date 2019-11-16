@@ -3,11 +3,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
 
-import App from './components/App';
-import configureStore from './store';
-import client from './graphql';
+import App from 'components/App';
+import configureStore from 'store';
+import client from 'graphqlClient';
 
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from 'serviceWorker';
 
 const store = configureStore();
 

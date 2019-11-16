@@ -10,7 +10,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../store';
+import { AppState } from 'store';
 import SearchIcon from '@material-ui/icons/Search';
 
 import styles from './styles';

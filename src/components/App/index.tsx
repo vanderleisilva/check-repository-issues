@@ -1,9 +1,9 @@
 import React from 'react';
 import { Typography, Container, AppBar, makeStyles } from '@material-ui/core';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import List from '../ListIssues';
-import Show from '../ShowIssue';
-import Loading from '../Loading';
+import List from 'components/ListIssues';
+import Show from 'components/ShowIssue';
+import Loading from 'components/Loading';
 
 import styles from './styles';
 const useStyles = makeStyles(styles);
