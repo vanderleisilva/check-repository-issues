@@ -12,14 +12,21 @@ import { DATE_FORMAT } from 'const';
 const useStyles = makeStyles(styles);
 
 const Index: React.FC = () => {
-  const selected = useSelector(({ issues: { visible } }: AppState) => visible);
+  const {
+    visible,
+    loading,
+  } = useSelector(({ issues: { visible, loading } }: AppState) => ({
+    visible,
+    loading,
+  }));
+  
   const classes = useStyles();
 
-  if (!selected || !selected.repository || !selected.repository.issue) {
+  if (loading || !visible || !visible.repository || !visible.repository.issue) {
     return <Fragment />;
   }
 
-  const Issue = selected.repository.issue;
+  const Issue = visible.repository.issue;
 
   return (
     <div className={classes.container}>
@@ -33,7 +40,8 @@ const Index: React.FC = () => {
       </Fab>
       <Typography children={Issue.title} variant='h6' />
       <Typography className={classes.info} component='p' variant='caption'>
-        Published at: <b>{moment(Issue.publishedAt).format(DATE_FORMAT)}</b>; Updated at:
+        Published at: <b>{moment(Issue.publishedAt).format(DATE_FORMAT)}</b>;
+        Updated at:
         <b>{moment(Issue.updatedAt).format(DATE_FORMAT)}</b>;
       </Typography>
       <div className={classes.chip}>
