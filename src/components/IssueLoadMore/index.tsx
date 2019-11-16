@@ -8,7 +8,7 @@ import { loadMoreIssues } from '../../store/issues/actions';
 const useStyles = makeStyles(styles);
 
 const IssueLoadMore: React.FC = () => {
-  const list = useSelector(({ issues: { list } }: AppState) => list);
+  const {list, loading} = useSelector(({ issues: { list, loading } }: AppState) => ({list, loading}));
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -27,6 +27,7 @@ const IssueLoadMore: React.FC = () => {
     <div className={classes.container}>
       <Button
         variant='contained'
+        disabled={loading}
         onClick={() => dispatch(loadMoreIssues(endCursor))}
         children='Load more'
         color='primary'
