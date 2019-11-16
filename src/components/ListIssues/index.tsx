@@ -18,15 +18,15 @@ const Index: React.FC = () => {
 
   useEffect(() => {
     if (data) dispatch(addIssues(data));
-  }, [data]);
+  }, [data, dispatch]);
 
   useEffect(() => {
     if (error) dispatch(setError(error));
-  }, [error]);
+  }, [error, dispatch]);
 
   useEffect(() => {
     dispatch(setLoading(loading));
-  }, [loading]);
+  }, [loading, dispatch]);
 
   if (error) {
     dispatch(setError(error));
